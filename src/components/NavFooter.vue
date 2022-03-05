@@ -1,8 +1,13 @@
 <template>
   <div></div>
 </template>
+
 <script>
-  export default{
-    name:'nav-header'
-  }
+export default {
+  name: 'nav-footer'
+}
 </script>
+
+<style>
+
+</style>
