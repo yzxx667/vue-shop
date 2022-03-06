@@ -5,7 +5,6 @@
 </template>
 
 <script>
-// import storage from './storage/index'
 export default {
   name: 'app',
   components: {
@@ -13,14 +12,19 @@ export default {
   },
   data(){
     return {
-      
+      res:{}
     }
   },
   mounted(){
-    // storage.setItem('a',1)
-    // storage.setItem('abc',{a:1},'user')
-    // storage.clear('abc','user')
-    // console.log(storage.getItem('age','user'))
+    // 本地加载请求静态json文件
+    // this.axios.get('/mock/user/login.json').then((res)=>{
+    //   this.res = res
+    // })
+
+    //fastmock
+    this.axios.get('/user/login').then((res)=>{
+      this.res = res
+    })
   }
   }
 </script>
