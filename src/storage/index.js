@@ -1,7 +1,5 @@
 // storage封装
 const STORAGE_KEY = 'mall';
-
-
 export default {
     //存储值
     setItem(key, value, module_name) {
@@ -29,6 +27,7 @@ export default {
     clear(key, module_name) {
         let val = this.getStorage();
         if(module_name){
+            if (!val[module_name]) return;
             delete val[module_name][key];
         }else {
             delete val[key]
