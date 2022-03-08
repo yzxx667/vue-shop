@@ -2,10 +2,26 @@
 .modal{
     z-index: 10;
     @include position(fixed);
+    // transition: .5s;
     .mask{
         @include position(fixed);
         background-color: $colorI;
         opacity: .5;
+    }
+    &.slide-enter{
+        top: -100%;
+    }
+    &.slide-enter-active{
+        transition: .5s;
+    }
+    &.slide-enter-to{
+        top: 0%;
+    }
+    &.slide-leave-active{
+        transition: .5s;
+    }
+    &.slide-leave-to{
+        top: -100%;
     }
     .modal-dialog{
       @include position(absolute,40%,50%,660px,auto);
