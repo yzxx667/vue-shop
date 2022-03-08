@@ -81,17 +81,14 @@
           <div class="list-box">
             <div class="list" v-for="(arr, index) in phoneList" :key="index">
               <div class="item" v-for="(item, j) of arr" :key="j">
-                <span :class="{'new-pro':j%2==0}">新品</span>
+                <span :class="{ 'new-pro': j % 2 == 0 }">新品</span>
                 <div class="item-img">
-                  <img
-                    :src="item.mainImage"
-                    alt=""
-                  />
+                  <img :src="item.mainImage" alt="" />
                 </div>
                 <div class="item-info">
-                  <h3>{{item.name}}</h3>
-                  <p>{{item.subtitle}}</p>
-                  <p class="price">{{item.price}}元</p>
+                  <h3>{{ item.name }}</h3>
+                  <p>{{ item.subtitle }}</p>
+                  <p class="price">{{ item.price }}元</p>
                 </div>
               </div>
             </div>
@@ -100,6 +97,17 @@
       </div>
     </div>
     <service-bar></service-bar>
+    <modal
+      title="提示"
+      sureText="查看购物车"
+      btnType="1"
+      modalType="middle"
+      :showModal="showModal"
+    >
+      <template v-slot:body>
+        <p>商品添加成功！</p>
+      </template>
+    </modal>
   </div>
 </template>
 
@@ -107,12 +115,14 @@
 import ServiceBar from "../components/ServiceBar.vue";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+import Modal from "../components/Modal.vue";
 export default {
   name: "nav-home",
   components: {
     Swiper,
     SwiperSlide,
     ServiceBar,
+    Modal,
   },
   data() {
     return {
@@ -206,23 +216,27 @@ export default {
         },
       ],
       phoneList: [],
+      showModal:true
     };
   },
-  mounted () {
-    this.init()
+  mounted() {
+    this.init();
   },
   methods: {
-    init(){
-      this.axios.get('/products',{
-        params:{
-          categoryId:100012,
-          pageSize:8
-        }
-      }).then((res)=>{
-        this.phoneList = [res.list.slice(0,4),res.list.slice(4,8)]
-      })
-    }
-  }
+    init() {
+      this.axios
+        .get("/products", {
+          params: {
+            categoryId: 100012,
+            pageSize: 14,
+          },
+        })
+        .then((res) => {
+          //一共14 前六个不用
+          this.phoneList = [res.list.slice(6, 10), res.list.slice(10, 14)];
+        });
+    },
+  },
 };
 </script>
 
@@ -364,15 +378,14 @@ export default {
               font-size: 14px;
               color: $colorG;
               line-height: 24px;
-              &.new-pro{
+              &.new-pro {
                 background-color: #7ecf68;
               }
-              &.kill-pro{
+              &.kill-pro {
                 background-color: #e82626;
               }
             }
             .item-img {
-              
               img {
                 width: 100%;
                 height: 195px;
