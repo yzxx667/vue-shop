@@ -6,7 +6,7 @@
           <a href="javascript:;">小米商城</a>
           <a href="javascript:;">MUI</a>
           <a href="javascript:;">云服务</a>
-          <a href="javascript:;">协议规则</a>
+          <a href="javascript:;" @click="logout">退出登录</a>
         </div>
         <div class="topbar-user">
           <a href="javascript:;" v-if="username">{{username}}</a>
@@ -160,6 +160,12 @@ export default {
     },
     goToCart(){
       this.$router.push('/cart');
+    },
+    // 退出登录
+    logout () {
+      this.axios.post('/user/logout').then(()=>{
+        alert('退出成功');
+      })
     }
   }
   

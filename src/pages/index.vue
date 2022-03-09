@@ -238,17 +238,17 @@ export default {
           this.phoneList = [res.list.slice(6, 10), res.list.slice(10, 14)];
         });
     },
-    addCart(){
-      this.showModal = true
-      // this.axios.post('/carts',{
-      //   productId: id,
-      //   selected: true
-      // }).then((res)=>{
-      //   console.log(res)
-       
-      // }).catch((err)=>{
-      //   console.log(err)
-      // })
+    addCart(id){
+      this.axios.post('/carts',{
+        productId: id,
+        selected: true
+      }).then((res)=>{
+        this.showModal = true
+        this.$store.dispatch('savecartCount',res.cartTotalQuantity)
+      }).catch((err)=>{
+        this.showModal = true
+        console.error(err)
+      })
     },
      goToCart(){
       this.$router.push('/cart')
