@@ -45,7 +45,7 @@
         </div>
         <swiper :options="swiperOptions">
           <swiper-slide v-for="(item, index) of slideList" :key="index">
-            <a href="'/#/product/'+item.id">
+            <a :href="'/#/product/' + item.id">
               <img :src="item.img" />
             </a>
           </swiper-slide>
