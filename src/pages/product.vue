@@ -52,11 +52,11 @@
           后置960帧电影般超慢动作视频，将眨眼间的美妙展现得淋漓尽致！<br />更能AI
           精准分析视频内容，15个场景智能匹配背景音效。
         </p>
-        <div class="video-bg" @click="showSlide = true"></div>
+        <div class="video-bg" @click="showSlide = 'slideDown'"></div>
         <div class="video-box">
-          <div class="overlay" v-if="showSlide"></div>
-          <div class="video" :class="{'slide': showSlide}">
-            <span class="icon-close" @click="showSlide = false"></span>
+          <div class="overlay" v-if="showSlide=='slideDown'"></div>
+          <div class="video" :class="showSlide">
+            <span class="icon-close" @click="showSlide = 'slideUp'"></span>
             <video src="/imgs/product/video.mp4" muted autoplay controls="control"></video>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default {
   },
   data() {
     return {
-      showSlide: false,
+      showSlide: '',
       swiperOption: {
         autoplay: true,
         slidesPerView: 3,
@@ -181,6 +181,26 @@ export default {
           opacity: .4;
           z-index: 10;
         }
+        @keyframes slideDown{
+          from{
+            top:-50%;
+            opacity: 0;
+          }
+          to{
+            top:50%;
+            opacity: 1;
+          }
+        }
+        @keyframes slideUp{
+          from{
+            top:50%;
+            opacity: 1;
+          }
+          to{
+            top:-50%;
+            opacity: 0;
+          }
+        }
         .video{
           position: fixed;
           top: -50%;
@@ -189,11 +209,13 @@ export default {
           z-index: 10;
           width: 1000px;
           height: 536px;
-          opacity: 0;
-          transition: all .6s;
-          &.slide{
-            top:50%;
-            opacity: 1;
+          opacity: 1;
+          &.slideDown{
+            animation: slideDown .6s linear;
+            top: 50%;
+          }
+          &.slideUp{
+            animation: slideUp .6s linear;
           }
           .icon-close{
             position: absolute;
