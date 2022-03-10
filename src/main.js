@@ -28,8 +28,8 @@ axios.defaults.timeout = 8000;
 // console.log(env.baseURL)
 
 // 接口错误拦截
-axios.interceptors.response.use(function(response){
-  let res = response.data;
+axios.interceptors.response.use(async function(response){
+  let res = await response.data;
   let path = location.hash;
   if(res.status === 0){
     return res.data;
