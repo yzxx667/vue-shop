@@ -246,7 +246,11 @@ export default {
         this.showModal = true
         this.$store.dispatch('savecartCount',res.cartTotalQuantity)
       }).catch((err)=>{
-        this.showModal = true
+        if(err.status == 10){
+          this.$router.push('/login');
+        }else{
+          this.showModal = true
+        }
         console.error(err)
       })
     },

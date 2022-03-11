@@ -2,6 +2,8 @@ import Vue from 'vue'
 import router from './router'
 import axios from 'axios'
 import VueLazyLoad from 'vue-lazyload'
+import { Message } from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 import store from './store'
 import App from './App.vue'
 import VueCookie from 'vue-cookie'
@@ -11,6 +13,7 @@ Vue.use(VueCookie);
 Vue.use(VueLazyLoad,{
   loading: '/imgs/loading-svg/loading-bars.svg'
 })
+Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
 
@@ -28,8 +31,8 @@ axios.defaults.timeout = 8000;
 // console.log(env.baseURL)
 
 // 接口错误拦截
-axios.interceptors.response.use(async function(response){
-  let res = await response.data;
+axios.interceptors.response.use(function(response){
+  let res =  response.data;
   let path = location.hash;
   if(res.status === 0){
     return res.data;
@@ -39,7 +42,7 @@ axios.interceptors.response.use(async function(response){
     } 
     return Promise.reject(res)
   }else {
-    alert(res.msg);
+    Message.warning(res.msg)
     return Promise.reject(res)
   }
 })
