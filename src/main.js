@@ -51,6 +51,7 @@ axios.interceptors.response.use(function(response){
   return Promise.reject(error)
 })
 
+
 new Vue({
   store, //vuex
   router,

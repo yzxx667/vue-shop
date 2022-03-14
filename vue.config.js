@@ -16,5 +16,19 @@ module.exports = {
       }
     }
   },
+  //输出路径
+  // publicPath:'/app',
+  //输出文件夹
+  // outputDir:'dist',
+  //输出html名称
+  // indexPath:'index2.html',
+  //eslint开关
+  // lintOnSave:true,
   // lintOnSave:false, //关闭eslint
+  // 是否需要source map
+  productionSourceMap:true,
+  //删除预加载
+  chainWebpack:(config)=>{
+    config.plugins.delete('prefetch');
+  }
 }
